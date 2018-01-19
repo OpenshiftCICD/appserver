@@ -16,7 +16,6 @@ function create() {
   oc new-app -f ../templates/service-app.yml \
     -p "NAME=${APP_SERVICE}" \
     -p "MAVEN_REPSOTIRY_URL=${MAVEN_REPSOTIRY_URL}" \
-    -p "DOCKER_REGISTRY_URI=${DOCKER_REGISTRY_URI}" \
     -p "GIT_REPO_URL=${APP_SERVICE_GIT_URL}" \
     -p "GIT_REPO_REF=${APP_SERVICE_GIT_REF}" \
     -p "SECRET_GITHUB_SSH=${SECRET_GITHUB_SSH}" \

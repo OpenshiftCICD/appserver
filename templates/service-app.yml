@@ -18,10 +18,6 @@ parameters:
     displayName: "The url of the maven repository to download binary from"
     required: true
 
-  - name: "DOCKER_REGISTRY_URI"
-    displayName: "The uri (no https://) of the docker registry to push the app image to"
-    required: true
-
   - name: "GIT_REPO_URL"
     displayName: "The repository url"
     required: true
@@ -77,6 +73,10 @@ objects:
           env:
             - name: "BUILD_LOGLEVEL"
               value: "5"
+            - name: "MAVEN_REPSOTIRY_URL"
+              value: "${MAVEN_REPSOTIRY_URL}"
+            - name: "VERSION"
+              value: "none"
       output:
         to:
           kind: "ImageStreamTag"
@@ -84,9 +84,6 @@ objects:
           labels:
             app: "${NAME}"
       triggers:
-        - type: "GitHub"
-          github:
-            secret: "${SECRET_GITHUB_HOOK}"
         - type: "ConfigChange"
         - type: "ImageChange"
           automatic: true
