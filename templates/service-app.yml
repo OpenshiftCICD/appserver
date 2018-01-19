@@ -1,0 +1,97 @@
+kind: "Template"
+apiVersion: "v1"
+metadata:
+  name: "app"
+  annotations:
+    openshift.io/display-name: "Microservice App"
+    description: "The hexample microservice App"
+    iconClass: "icon-app"
+    tags: "instant-app"
+
+parameters:
+  - name: "NAME"
+    displayName: "The service name"
+    value: "app"
+    required: true
+
+  - name: "MAVEN_REPSOTIRY_URL"
+    displayName: "The url of the maven repository to download binary from"
+    required: true
+
+  - name: "DOCKER_REGISTRY_URI"
+    displayName: "The uri (no https://) of the docker registry to push the app image to"
+    required: true
+
+  - name: "GIT_REPO_URL"
+    displayName: "The repository url"
+    required: true
+
+  - name: "GIT_REPO_REF"
+    displayName: "The repository ref"
+    required: true
+
+  - name: "SECRET_GITHUB_SSH"
+    displayName: "The git secret to use"
+    required: true
+
+  - name: "SECRET_GITHUB_HOOK"
+    displayName: "The git hook secret to use"
+    required: true
+
+  - name: "SECRET_NEXUS_SERVICE"
+    displayName: "The secret for downloading from nexus"
+    required: true
+
+objects:
+  - kind: "ImageStream"
+    apiVersion: "v1"
+    metadata:
+      name: "${NAME}"
+      labels:
+        app: "${NAME}"
+      annotations:
+        openshift.io/display-name: "Microservice ${NAME}"
+
+  - kind: "BuildConfig"
+    apiVersion: "v1"
+    metadata:
+      name: "${NAME}"
+      labels:
+        name: "${NAME}"
+        app: "${NAME}"
+    spec:
+      source:
+        type: "Git"
+        contextDir: "/docker"
+        git:
+          uri: "${GIT_REPO_URL}"
+          ref: "${GIT_REPO_REF}"
+        sourceSecret:
+          name: "${SECRET_GITHUB_SSH}"
+        secrets:
+          - secret:
+              name: "${SECRET_NEXUS_SERVICE}"
+      strategy:
+        type: "Docker"
+        dockerStrategy:
+          env:
+            - name: "BUILD_LOGLEVEL"
+              value: "5"
+      output:
+        to:
+          kind: "ImageStreamTag"
+          name: "${NAME}:latest"
+          labels:
+            app: "${NAME}"
+      triggers:
+        - type: "GitHub"
+          github:
+            secret: "${SECRET_GITHUB_HOOK}"
+        - type: "ConfigChange"
+        - type: "ImageChange"
+          automatic: true
+          containerNames:
+            - "${NAME}"
+          from:
+            kind: "ImageStreamTag"
+            name: "openjdk8:latest"

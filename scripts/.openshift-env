@@ -1,0 +1,17 @@
+# Secrets the apps use
+SECRET_NEXUS_DOCKER_REGISTRY="secret-docker-registry"
+SECRET_GITHUB_SSH="secret-github-ssh"
+SECRET_NEXUS_SERVICE="secret-nexus-service"
+
+# build resources
+MAVEN_REPSOTIRY_URL="https://nexus-57-het-fhooe-openshift-ci-cd.cloud.itandtel.at/repository/maven-releases/"
+MAVEN_MIRROR_URL="http://nexus-57-het-fhooe-openshift-ci-cd.cloud.itandtel.at/repository/maven-central/"
+DOCKER_REGISTRY_URI="nexus-docker-registry-57-het-fhooe-openshift-ci-cd.cloud.itandtel.at"
+DOCKER_REGISTRY_URL="https://${DOCKER_REGISTRY_URI}"
+
+# git config
+APP_SERVICE_GIT_URL="git@github.com:OpenshiftCICD/service-app.git"
+APP_SERVICE_GIT_REF="develop"
+
+# Service names
+APP_SERVICE=spring-boot
