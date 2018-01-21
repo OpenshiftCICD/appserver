@@ -13,7 +13,7 @@ parameters:
     displayName: "The service name"
     required: true
 
-  - name: "MAVEN_REPSOTIRY_URL"
+  - name: "MAVEN_REPOSITORY_URL"
     displayName: "The url of the maven repository to download binary from"
     required: true
 
@@ -100,8 +100,8 @@ objects:
           env:
             - name: "BUILD_LOGLEVEL"
               value: "5"
-            - name: "MAVEN_REPSOTIRY_URL"
-              value: "${MAVEN_REPSOTIRY_URL}"
+            - name: "MAVEN_REPOSITORY_URL"
+              value: "${MAVEN_REPOSITORY_URL}"
             - name: "VERSION"
               value: "${VERSION}"
       output:

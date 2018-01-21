@@ -15,7 +15,7 @@ function create() {
   # The app service
   oc new-app -f ../templates/service-app.yml \
     -p "NAME=${APP_SERVICE}" \
-    -p "MAVEN_REPSOTIRY_URL=${MAVEN_REPSOTIRY_URL}" \
+    -p "MAVEN_REPOSITORY_URL=${MAVEN_REPOSITORY_URL}" \
     -p "VERSION=0.1.0" \
     -p "GIT_REPO_URL=${APP_SERVICE_GIT_URL}" \
     -p "GIT_REPO_REF=${APP_SERVICE_GIT_REF}" \

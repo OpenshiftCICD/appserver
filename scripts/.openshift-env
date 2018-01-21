@@ -4,7 +4,7 @@ SECRET_GITHUB_SSH="secret-github-ssh"
 SECRET_NEXUS_SERVICE="secret-nexus-service"
 
 # build resources
-MAVEN_REPSOTIRY_URL="https://nexus-57-het-fhooe-openshift-ci-cd.cloud.itandtel.at/repository/maven-releases"
+MAVEN_REPOSITORY_URL="https://nexus-57-het-fhooe-openshift-ci-cd.cloud.itandtel.at/repository/maven-releases"
 MAVEN_MIRROR_URL="http://nexus-57-het-fhooe-openshift-ci-cd.cloud.itandtel.at/repository/maven-central"
 DOCKER_REGISTRY_URI="nexus-docker-registry-57-het-fhooe-openshift-ci-cd.cloud.itandtel.at"
 DOCKER_REGISTRY_URL="https://${DOCKER_REGISTRY_URI}"
