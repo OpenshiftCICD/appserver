@@ -11,7 +11,7 @@ DOCKER_REGISTRY_URL="https://${DOCKER_REGISTRY_URI}"
 
 # git config
 APP_SERVICE_GIT_URL="git@github.com:OpenshiftCICD/service-app.git"
-APP_SERVICE_GIT_REF="develop"
+APP_SERVICE_GIT_REF="master"
 
 # Service names
 APP_SERVICE=spring-boot
