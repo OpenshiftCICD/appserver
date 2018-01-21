@@ -10,12 +10,13 @@ source ./.openshift-env
 source ./.openshift-secret-env
 
 function create() {
-  ./openshift-secrets.sh create
+  #./openshift-secrets.sh create
 
   # The app service
   oc new-app -f ../templates/service-app.yml \
     -p "NAME=${APP_SERVICE}" \
     -p "MAVEN_REPSOTIRY_URL=${MAVEN_REPSOTIRY_URL}" \
+    -p "VERSION=0.1.0" \
     -p "GIT_REPO_URL=${APP_SERVICE_GIT_URL}" \
     -p "GIT_REPO_REF=${APP_SERVICE_GIT_REF}" \
     -p "SECRET_GITHUB_SSH=${SECRET_GITHUB_SSH}" \
@@ -24,7 +25,7 @@ function create() {
 }
 
 function delete() {
-  ./openshift-secrets.sh delete
+  #./openshift-secrets.sh delete
 
   oc delete all -l app=${APP_SERVICE}
   oc delete secrets -l app=${APP_SERVICE}
