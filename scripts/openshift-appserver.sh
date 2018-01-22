@@ -10,7 +10,7 @@ source ./.openshift-env
 source ./.openshift-secret-env
 
 function create() {
-  #./openshift-secrets.sh create
+  ./openshift-secrets.sh create
 
   # The app service
   oc new-app -f ../templates/service-app.yml \
@@ -25,7 +25,7 @@ function create() {
 }
 
 function delete() {
-  #./openshift-secrets.sh delete
+  ./openshift-secrets.sh delete
 
   oc delete all -l app=${APP_SERVICE}
   oc delete secrets -l app=${APP_SERVICE}
